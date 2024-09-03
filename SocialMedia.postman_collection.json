@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "82044f5a-31cc-4f02-b823-4f5ee9b6ed60",
+		"name": "SocialMedia",
+		"description": "StartFragment\n\n#### API Endpoints Overview\n\n1. **Get CSRF Token:** `GET /csrf_cookie/`\n    \n    - Retrieves a CSRF token for subsequent requests.\n        \n    - Send a GET request to `/csrf_cookie/`\n        \n    - Please include correct X-CSRFToken (header)en each request.\n        \n2. **Signup:** `POST /signup/`\n    \n    - Creates a new user account.\n        \n    - **CSRF Token Required:** Yes\n        \n3. **Login:** `POST /login/`\n    \n    - Authenticates the user and creates a session.\n        \n    - **CSRF Token Required:** Yes\n        \n4. **Logout:** `POST /logout/`\n    \n    - Logs out the authenticated user.\n        \n    - **CSRF Token Required:** Yes\n        \n5. **Search Users:** `GET /users/search/?search=`\n    \n    - Searches for users by email or name.\n        \n    - **CSRF Token Required:** Yes\n        \n6. **Send Friend Request:** `POST /friend-requests/send/`\n    \n    - Sends a friend request to another user.\n        \n    - **CSRF Token Required:** Yes\n        \n7. **View Friend Requests:** `GET /friend-requests/view/`\n    \n    - Retrieves all pending friend requests.\n        \n    - **CSRF Token Required:** Yes\n        \n8. **Respond to Friend Request:** `POST /friend-requests/response/`\n    \n    - Accepts or rejects a friend request.\n        \n    - **CSRF Token Required:** Yes\n        \n9. **View Friend List:** `GET /user/friends/`\n    \n    - Retrieves the authenticated user's list of friends.\n        \n    - **CSRF Token Required:** Yes\n        \n\nStartFragment\n\n### CSRF Protection\n\nThe application uses Django's built-in CSRF protection mechanism. For POST requests, a valid CSRF token must be included in the headers.\n\n- **Step 1:** Before making POST requests (e.g., login, sending a friend request), retrieve a CSRF token by sending a GET request to `/csrf_cookie/`.\n    \n- **Step 2:** Include the CSRF token in the X-CSRFToken  \n    header for all subsequent POST requests.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36422132"
+	},
+	"item": [
+		{
+			"name": "Get CSRF Cookie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/csrf_cookie/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"csrf_cookie",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "C2yX1sNO4KotpvcuFnT4czbWOgXQF2iP",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test1@test.com\",\r\n    \"name\": \"test1\",\r\n    \"password\": \"123\",\r\n    \"confirm_password\":\"123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/signup/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test3@test.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "jp5zTp4ZzdJASTyu0YleQeDFlDdVnweP",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/logout/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sending friend request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test4@test.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/friend-requests/send/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friend-requests",
+						"send",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Responding to Friend Request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sender\":\"test1@test.com\",\r\n    \"response\":\"accept\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/friend-requests/response/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friend-requests",
+						"response",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "See all Friend Requests",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/friend-requests/view/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"friend-requests",
+						"view",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Searching users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/users/search/?search=test1@test.co",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"users",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "test1@test.co"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "See all friends",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-CSRFToken",
+						"value": "mLAGF1WhFaXi9wn752GQCAt2Y6kcob6d",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/user/friends/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"friends",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
